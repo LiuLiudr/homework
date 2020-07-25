@@ -2,6 +2,7 @@ package day02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,17 +17,37 @@ import java.util.Scanner;
  */
 public class Test08 {
     public static void main(String[] args) {
-        ArrayList<String> name=new ArrayList<>();
-        Scanner scon=new Scanner(System.in);
-        String xx="[\\u4e00-\\u9fa5]{2,4}[,][\\d]{2}[,][\\u4e00-\\u9fa5][,][\\d]{2,4}[;]";
-        String ff=scon.next();
-        System.out.println(ff.matches(xx));
-        while (ff.matches(xx)){
-            name.add(ff);
-            ff=scon.next();
+        Scanner consol=new Scanner(System.in);
+        int n=consol.nextInt();
+        String name;
+        int age;
+        String gender;//性别
+        int salary;//工资
+        List<Person> list=new ArrayList<>();
+
+
+      for(int i=0;i<n;i++){
+            String person=consol.next();
+            String[] xinxi=per(person);
+            name=String.valueOf(xinxi[0]);
+            age=Integer.parseInt(xinxi[1]);
+            gender=String.valueOf(xinxi[2]);
+            salary=Integer.parseInt(xinxi[3]);
+            Person person1=new Person(name,age,gender,salary);
+            list.add(person1);
         }
-        System.out.println(name);
-
+        System.out.println(list);
     }
-
+    public static String[] per(String person){
+        String stri="[;]";
+        String []ff=person.split(stri);
+        StringBuilder bui=new StringBuilder();
+        for (int i=0;i<ff.length;i++){
+            bui.append(ff[i]);
+        }
+        String oo=bui.toString();
+        String str="[,]";
+        String[] ovv=oo.split(str);
+        return ovv;
+    }
 }
